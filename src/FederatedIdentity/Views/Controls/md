@@ -1,0 +1,34 @@
+<FederatedIdentity.Provider>
+    <FI.IDControl.List>
+        <FI.IDcontrol.ProviderSubBlock provider="okta"/>
+        <FI.IDcontrol.ProviderSubBlock.Provider value = "google">
+            <FI.IDControl.ProviderSubBlock.ListItem>
+                <FI.IDControl.ProviderSubBlock.Icon/>
+                <FI.IDControl.ProviderSubBlock.Button/>
+            </FI.IDcontrol.ProviderSubBlock.ListItem>
+        </FI.IDcontrol.ProviderSubBlock.Provider>
+        <FI.IDcontrol.ProviderSubBlock provider="amazon"/>
+    </FI.IDcontrol.List>
+    <FI.IDcontrol render = renderFnc/>
+</FederatedIdentity.Provider>
+
+context: [google, okta]
+
+<FederatedIdentity.Prov>
+    <FI.IDControl.List>
+        <FI.IDcontrol.ProviderSubBlock provider = google />
+        <FI.IDcontrol.ProviderSubBlock provider = google />
+        <FI.IDcontrol.ProviderSubBlock provider = google />
+        <FI.IDcontrol.ProviderSubBlock provider = google />
+        <FI.IDcontrol.ProviderSubBlock provider = google />
+    </FI.IDcontrol.List>
+    <FI.IDcontrol render = renderFnc/>
+</FederatedIdentity.Prov>
+
+<FederatedIdentity/>
+
+FederatedIdentity = createFI(providers: 'google', { name: okta, icon: oktaicon, displayname: Google})
+
+context: {
+    { name: google, icon: googleicon, displayname: Google}
+}
