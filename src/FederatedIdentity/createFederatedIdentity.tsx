@@ -1,9 +1,7 @@
 import { FederatedIdentityElements } from "./context/elements/definitions";
 import { FederatedIdentityInput, createProviderProps } from "./types";
 //import { ActionState } from "../amplifyUIUtils/funcs";
-import { Controls } from "./types";
 import createProvider from "./createProvider";
-import IdentityView from "./Views/IdentitiesView";
 import { IdentitiesControl } from "./Views/Controls/IdentitiesControl"; 
 
 // interface useHandleSigninWithRedirectInput<K extends string = string>{
@@ -14,8 +12,7 @@ import { IdentitiesControl } from "./Views/Controls/IdentitiesControl";
 interface FederatedIdentity<T extends Partial<FederatedIdentityElements>> {
     (): JSX.Element;
     Provider: (props: { children?: React.ReactNode }) => React.JSX.Element;
-    IdentityView: () => JSX.Element;
-    Controls: Controls<T>
+    Identities: IdentitiesControl
 }
 
 // interface useHandleSignInWithRedirect<K extends string = string>{
@@ -35,9 +32,6 @@ export function createFederatedIdentity<T extends Partial<FederatedIdentityEleme
         ...input,
     };
 
-    // eslint-disable-next-line no-debugger
-    debugger;
-
     console.log("creating provider")
   
     const Provider = createProvider(providerProps)
@@ -47,18 +41,13 @@ export function createFederatedIdentity<T extends Partial<FederatedIdentityEleme
     function FederatedIdentity(): JSX.Element {
         return (
             <Provider>
-                <IdentityView/>
+                <IdentitiesControl/>
             </Provider>
         )
     }
 
-    const Controls: Controls<T> = {
-        Identities: IdentitiesControl,
-    }
-
     FederatedIdentity.Provider = Provider
-    FederatedIdentity.IdentityView = IdentityView
-    FederatedIdentity.Controls = Controls
+    FederatedIdentity.Identities = IdentitiesControl
 
     // const useHandleSignInWithRedirect = () => {
     //   // Implement the custom hook logic here

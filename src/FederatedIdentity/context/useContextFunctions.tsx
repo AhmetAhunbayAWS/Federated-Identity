@@ -2,9 +2,9 @@ import { HandleSignInWithRedirectContext } from "./HandleRedirectContext";
 import React from "react";
 import { handleSignInWithRedirect } from "../Views/Controls/helpers";
 import { ProviderData, ProviderType, socialProviderList, socialProvidersUnion } from "../types";
-import { ProviderDataContext } from "./ProviderDataContext";
+import { ProviderDataListContext } from "./ProviderDataListContext";
 import { GoogleIcon, FacebookIcon, AmazonIcon, AppleIcon } from "./providedIcons";
-import { ProviderSubBlockContext } from "./ListItemContext";
+import { ProviderDataContext } from "./ProviderDataContext";
 
 
 export const useHandleSignInWithRedirectContext = (): typeof handleSignInWithRedirect => {
@@ -19,8 +19,8 @@ export const useHandleSignInWithRedirectContext = (): typeof handleSignInWithRed
     return hsiwr;
 };
 
-export const useProviderSubBlockContext = () => {
-    const providerData = React.useContext(ProviderSubBlockContext);
+export const useProviderDataContext = () => {
+    const providerData = React.useContext(ProviderDataContext);
   
     if (providerData === undefined) {
       throw new Error();
@@ -29,8 +29,8 @@ export const useProviderSubBlockContext = () => {
   }
   
 
-export const useProviderData = (): ProviderData[] => {
-    const context = React.useContext(ProviderDataContext);
+export const useProviderDataListContext = (): ProviderData[] => {
+    const context = React.useContext(ProviderDataListContext);
   
     if (!context) {
       throw new Error('');
@@ -53,8 +53,6 @@ export const useProviderData = (): ProviderData[] => {
     }
     return ""
 }
-
-
 
 function supportedIcon(provider: socialProvidersUnion) : React.ReactNode {
     let iconComponent;

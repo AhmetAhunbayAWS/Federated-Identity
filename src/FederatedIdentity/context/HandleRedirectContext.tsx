@@ -6,9 +6,6 @@ export const HandleSignInWithRedirectContext =
 
 //TODO: move handleSignInWithRedirect elsewhere
 
-
-
-
 export const HandleSignInWithRedirectProvider = ({
     children,
     customRedirect,

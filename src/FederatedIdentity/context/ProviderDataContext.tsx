@@ -1,22 +1,22 @@
-import React from 'react';
-import { ProviderData, ProviderType } from '../types';
-import { toProviderData } from './useContextFunctions';
+import { ProviderData } from "../types";
+import React from "react";
+
+type ProviderDataContextProps = ProviderData | undefined
 
 export const ProviderDataContext =
-  React.createContext<ProviderData[] | undefined>(undefined);
+  React.createContext<ProviderDataContextProps>(undefined);
 
 export const ProviderDataProvider = ({
-  children,
-  providerTypes,
-}: {
-  children?: React.ReactNode;
-  providerTypes: ProviderType[];
-}): JSX.Element => {
-  const providerData : ProviderData[] = toProviderData(providerTypes)
-
-  return (
-    <ProviderDataContext.Provider value={providerData}>
-      {children}
-    </ProviderDataContext.Provider>
-  );
-};
+    children,
+    value,
+  }: {
+    children?: React.ReactNode;
+    value: ProviderData;
+  }): JSX.Element => {
+  
+    return (
+      <ProviderDataContext.Provider value={value}>
+        {children}
+      </ProviderDataContext.Provider>
+    );
+  };

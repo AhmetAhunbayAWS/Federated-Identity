@@ -1,7 +1,7 @@
 import { FederatedIdentityElements } from "./context/elements/definitions";
 import { ElementsProvider } from "../amplifyUIUtils/defineBaseElement";
 import { createProviderProps } from "./types";
-import { ProviderDataProvider } from "./context/ProviderDataContext";
+import { ProviderDataListProvider } from "./context/ProviderDataListContext";
 import { HandleSignInWithRedirectProvider } from "./context/HandleRedirectContext";
 
 
@@ -21,11 +21,11 @@ export default function createProvider<
   }): React.JSX.Element {
     return (
         <ElementsProvider elements={elements}>
-            <ProviderDataProvider providerTypes={providers}>
+            <ProviderDataListProvider providerTypes={providers}>
                 <HandleSignInWithRedirectProvider customRedirect={handleSignInWithRedirect}>
                     {children}
                 </HandleSignInWithRedirectProvider>
-            </ProviderDataProvider>
+            </ProviderDataListProvider>
         </ElementsProvider>
     );
   };

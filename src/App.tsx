@@ -8,7 +8,12 @@ function App() {
 
   return (
     <FederatedIdentity.Provider>
-        <FederatedIdentity.Controls.Identities/>
+      <FederatedIdentity.Identities>
+        <FederatedIdentity.Identities.List>
+          <FederatedIdentity.Identities.Identity provider="google">
+          </FederatedIdentity.Identities.Identity>
+        </FederatedIdentity.Identities.List>
+      </FederatedIdentity.Identities>
     </FederatedIdentity.Provider>
   )
 }
