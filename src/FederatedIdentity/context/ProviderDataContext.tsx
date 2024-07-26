@@ -8,14 +8,14 @@ export const ProviderDataContext =
 
 export const ProviderDataProvider = ({
     children,
-    value,
+    providerData,
   }: {
     children?: React.ReactNode;
-    value: ProviderData;
+    providerData: ProviderData;
   }): JSX.Element => {
   
     return (
-      <ProviderDataContext.Provider value={value}>
+      <ProviderDataContext.Provider value={providerData}>
         {children}
       </ProviderDataContext.Provider>
     );

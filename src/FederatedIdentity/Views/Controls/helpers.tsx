@@ -3,11 +3,12 @@ import { socialProvidersUnion, socialProviderList, AuthProvider } from "../../ty
 import { signInWithRedirect } from "aws-amplify/auth";
 import React from "react";
 import { BaseElement, ElementRefType } from "../../../amplifyUIUtils/funcs";
+import { HandleSigninWithRedirectInput } from "../../types";
 
 
 
 
-export const handleClick = <T extends string = string>(provider: T, hsiwr: typeof handleSignInWithRedirect ) => {
+export const handleClick = <T extends string = string>(providerName: T, hsiwr: typeof handleSignInWithRedirect ) => {
 
   const _handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
 
@@ -15,7 +16,7 @@ export const handleClick = <T extends string = string>(provider: T, hsiwr: typeo
 
     //checks whether provider is in FederatedIdentityProviders
     //TODO: sort out potentially tricky logic with having a custom provider that shares a name with existing provider?
-    hsiwr({provider}) 
+    hsiwr({providerName}) 
   };
   
   return _handleClick
@@ -56,19 +57,14 @@ export function supportedProviderName(provider : socialProvidersUnion) : string 
     return ""
 }
 
-interface handleSignInWithRedirectInput<T extends string = string>{
-  provider: T
-  customState?: string
-}
+export function handleSignInWithRedirect(input: HandleSigninWithRedirectInput): Promise<void>{
+  const {providerName, customState} = input
 
-export function handleSignInWithRedirect(input: handleSignInWithRedirectInput): Promise<void>{
-  const {provider} = input
-
-  if (socialProviderList.indexOf(provider) > -1){
-    return signInWithRedirect({provider: provider as AuthProvider})
+  if (socialProviderList.indexOf(providerName) > -1){
+    return signInWithRedirect({provider: providerName as AuthProvider, customState: customState})
   } else {
     return signInWithRedirect({provider: {
-        custom: provider
-    }})
+        custom: providerName
+    }, customState: customState})
   }  
 }

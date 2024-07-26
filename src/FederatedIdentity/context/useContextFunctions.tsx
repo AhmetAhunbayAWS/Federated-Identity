@@ -54,18 +54,17 @@ export const useProviderDataListContext = (): ProviderData[] => {
     return ""
 }
 
-function supportedIcon(provider: socialProvidersUnion) : React.ReactNode {
-    let iconComponent;
-          if (provider === 'facebook') {
-              iconComponent = <FacebookIcon />;
-          } else if (provider === 'google') {
-              iconComponent = <GoogleIcon />;
-          } else if (provider === 'amazon') {
-              iconComponent = <AmazonIcon />;
-          } else if (provider === 'apple') {
-              iconComponent = <AppleIcon />;
-          }
-    return iconComponent;
+function supportedIcon(provider: socialProvidersUnion) : JSX.Element {
+        if (provider === 'facebook') {
+            return FacebookIcon;
+        } else if (provider === 'google') {
+        return GoogleIcon;
+        } else if (provider === 'amazon') {
+        return AmazonIcon;
+        } else if (provider === 'apple') {
+        return AppleIcon;
+        }
+    return <></>;
 }
 
 

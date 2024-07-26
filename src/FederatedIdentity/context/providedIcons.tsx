@@ -1,7 +1,4 @@
-import { Icon } from "@aws-amplify/ui-react";
-
-export const AppleIcon = (): JSX.Element => {
-    return (
+export const AppleIcon : JSX.Element =
       <svg
         aria-label="Apple icon"
         className="amplify-icon federated-sign-in-icon"
@@ -14,11 +11,9 @@ export const AppleIcon = (): JSX.Element => {
       >
         <path d="M747.4 535.7c-.4-68.2 30.5-119.6 92.9-157.5-34.9-50-87.7-77.5-157.3-82.8-65.9-5.2-138 38.4-164.4 38.4-27.9 0-91.7-36.6-141.9-36.6C273.1 298.8 163 379.8 163 544.6c0 48.7 8.9 99 26.7 150.8 23.8 68.2 109.6 235.3 199.1 232.6 46.8-1.1 79.9-33.2 140.8-33.2 59.1 0 89.7 33.2 141.9 33.2 90.3-1.3 167.9-153.2 190.5-221.6-121.1-57.1-114.6-167.2-114.6-170.7zm-105.1-305c50.7-60.2 46.1-115 44.6-134.7-44.8 2.6-96.6 30.5-126.1 64.8-32.5 36.8-51.6 82.3-47.5 133.6 48.4 3.7 92.6-21.2 129-63.7z"></path>
       </svg>
-    );
-};
+    
   
-export const GoogleIcon = (): JSX.Element => {
-    return (
+export const GoogleIcon : JSX.Element = 
       <svg
         aria-label="Google icon"
         className="amplify-icon federated-sign-in-icon"
@@ -43,23 +38,21 @@ export const GoogleIcon = (): JSX.Element => {
           fill="#EB4335"
         />
       </svg>
-    );
-};
+
   
-export const FacebookIcon = (): JSX.Element => {
-    return (
-      <Icon
+export const FacebookIcon : JSX.Element = 
+      <svg
         className="federated-sign-in-icon"
-        ariaLabel="Facebook icon"
-        viewBox={{ minX: 0, minY: 0, width: 279, height: 538 }}
-        pathData="M82.3409742,538 L82.3409742,292.936652 L0,292.936652 L0,196.990154 L82.2410458,196.990154 L82.2410458,126.4295 C82.2410458,44.575144 132.205229,0 205.252865,0 C240.227794,0 270.306232,2.59855099 279,3.79788222 L279,89.2502322 L228.536175,89.2502322 C188.964542,89.2502322 181.270057,108.139699 181.270057,135.824262 L181.270057,196.89021 L276.202006,196.89021 L263.810888,292.836708 L181.16913,292.836708 L181.16913,538 L82.3409742,538 Z"
-        fill="#1877F2"
-      />
-    );
-};
-  
-export const AmazonIcon = (): JSX.Element => {
-    return (
+        aria-label="Facebook icon"
+        viewBox='0 0 279 538'
+      >
+        <path
+          d="M82.3409742,538 L82.3409742,292.936652 L0,292.936652 L0,196.990154 L82.2410458,196.990154 L82.2410458,126.4295 C82.2410458,44.575144 132.205229,0 205.252865,0 C240.227794,0 270.306232,2.59855099 279,3.79788222 L279,89.2502322 L228.536175,89.2502322 C188.964542,89.2502322 181.270057,108.139699 181.270057,135.824262 L181.270057,196.89021 L276.202006,196.89021 L263.810888,292.836708 L181.16913,292.836708 L181.16913,538 L82.3409742,538 Z"
+          fill="#1877F2"
+        />
+      </svg>
+
+export const AmazonIcon: JSX.Element =
       <svg
         aria-label="Amazon icon"
         className="amplify-icon federated-sign-in-icon"
@@ -78,5 +71,21 @@ export const AmazonIcon = (): JSX.Element => {
           fill="#F2541B"
         />
       </svg>
-    );
-};
+
+export const oktaIcon : JSX.Element = 
+  <svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <title>Avatar / Images / App Types / SPA</title>
+  <desc>Created with Sketch.</desc>
+  <g id="Avatar-/-Images-/-App-Types-/-SPA" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <rect fill="none" x="0" y="0" width="100" height="100"></rect>
+      <g id="Group-2">
+          <rect id="Rectangle" x="0" y="0" width="100" height="100"></rect>
+      </g>
+      <g id="spa" transform="translate(18.750000, 18.750000)" fill-rule="nonzero">
+          <polygon id="Fill-34" fill="#44C7F4" points="25.0115825 32.2916667 43.7703068 0 18.7587244 0 0 32.2916667 18.7587244 64.5833333 43.7703068 64.5833333"></polygon>
+          <polygon id="Fill-36" fill="#EC5424" points="37.4861613 32.2916667 18.7274368 64.5833333 43.7390193 64.5833333 62.4977437 32.2916667 43.7390193 0 18.7274368 0"></polygon>
+          <polygon id="Fill-38" fill="#16214D" points="43.7390193 0 18.7274368 0 31.2332281 21.5277778"></polygon>
+          <polygon id="Fill-40" fill="#16214D" points="18.7274368 64.5833333 43.7390193 64.5833333 31.2332281 43.0555555"></polygon>
+      </g>
+  </g>
+  </svg>

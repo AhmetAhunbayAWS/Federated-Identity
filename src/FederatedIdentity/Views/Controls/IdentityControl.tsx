@@ -75,48 +75,42 @@ export interface IdentityControl<
   K extends string = string
 > {
   (props: {
-    provider: K;
+    providerName: K;
     children?: React.ReactNode;
   }): JSX.Element;
   ListItem: T['ListItem'];
   Button: T['Button'];
   Icon: T['Icon'];
-  Provider: ({ children, value, }: {
-    children?: React.ReactNode;
-    value: ProviderData;
-}) => JSX.Element
 }
 
 export const IdentityControl : IdentityControl = (props) => {
-    let { provider} = props
+    let { providerName: _providerName } = props;
     const {children} = props
-    console.log('IdentityControl')
-    console.log({provider})
     
-    if (provider === undefined){
+    if (_providerName === undefined){
         throw new Error();
     }
 
-    if (socialProviderList.indexOf(provider) > -1){
-        provider = supportedProviderName(provider as socialProvidersUnion)
+    if (socialProviderList.indexOf(_providerName) > -1){
+        _providerName = supportedProviderName(_providerName as socialProvidersUnion)
     }
     
     const providers = useProviderDataListContext();
-    const value = providers.find(({ providerName }) => providerName === provider);
+    const value = providers.find(({ providerName }) => providerName === _providerName);
+
+    console.log(value)
 
     if (!value) {
         throw new Error();
     }
 
+    //TODO: pass providerName into providerDataProvider
     return (
-        <ProviderDataProvider value={value}>
-                {children ??
-                    <ListItemControlElement>
-                        <p>hi</p>
-                        {/* <ButtonControlElement>
-                           <IconControlElement/>
-                        </ButtonControlElement> */}
-                    </ListItemControlElement>
+        <ProviderDataProvider providerData={value}>
+                {children ??                    
+                    <ButtonControlElement>
+                        <IconControlElement/>
+                    </ButtonControlElement>                    
                 }         
         </ProviderDataProvider>
     )
@@ -125,4 +119,3 @@ export const IdentityControl : IdentityControl = (props) => {
 IdentityControl.Button = ButtonControlElement
 IdentityControl.Icon = IconControlElement
 IdentityControl.ListItem = ListItemControlElement
-IdentityControl.Provider = ProviderDataProvider

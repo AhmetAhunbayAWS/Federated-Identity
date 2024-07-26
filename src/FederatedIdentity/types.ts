@@ -1,7 +1,7 @@
 import { FederatedIdentityElements } from "./context/elements/definitions";
 import React from "react";
 import { IdentitiesControl } from "./Views/Controls/IdentitiesControl";
-import { handleSignInWithRedirect } from "./context/HandleRedirectContext";
+import { handleSignInWithRedirect } from "./Views/Controls/helpers";
 
 const {List} = FederatedIdentityElements
 
@@ -15,19 +15,10 @@ export const socialProviderList = [
     'google'
 ]
 
-export interface FederatedIdentityInput<T extends Partial<FederatedIdentityElements>, K extends string = string>{
+export interface CreateFederatedIdentityInput<T extends Partial<FederatedIdentityElements>, K extends string = string>{
     elements?: T;
     providers: ProviderType<K>[];
     handleSignInWithRedirect?: typeof handleSignInWithRedirect;
-}
-
-export interface Controls<T extends Partial<FederatedIdentityElements> = FederatedIdentityElements>{
-    Identities: IdentitiesControl;
-}
-
-export interface FederatedIdentity<T extends Partial<FederatedIdentityElements> = FederatedIdentityElements> {
-    (): React.JSX.Element;
-    Provider: (props: { children?: React.ReactNode }) => React.JSX.Element;
 }
 
 export interface ProviderData<T extends string = string> {
@@ -38,8 +29,26 @@ export interface ProviderData<T extends string = string> {
 
 export type ProviderType<K extends string = string> = ProviderData<K> | socialProvidersUnion;
 
-export interface createProviderProps<T extends Partial<FederatedIdentityElements> = Partial<FederatedIdentityElements>, K extends string = string>{
+export interface createProviderProps<T, K extends string = string>{
     providers: ProviderType<K>[];
     handleSignInWithRedirect?: typeof handleSignInWithRedirect;
     elements?: T
+}
+
+export interface HandleSigninWithRedirectInput<K extends string = string> {
+    providerName: K;
+    customState?: string;
+}
+
+interface ActionState<T> {
+    data: T;
+    isLoading: boolean;
+    message: string | undefined;
+}
+
+export interface UseHandleSignInWithRedirect<K extends string = string> {
+    (): [
+        state: ActionState<void | undefined>,
+        handleAction: (...input: HandleSigninWithRedirectInput<K>[]) => void,
+    ];
 }

@@ -45,7 +45,7 @@ export const IdentitiesControl : IdentitiesControl = (props) => {
         {children ?? providers.map((provider) => (
             // renderListItem ?
             //      (renderListItem(provider)) : 
-                (<IdentityControl key = {provider.providerName} provider={provider.providerName}/>)
+                (<IdentityControl key = {provider.providerName} providerName={provider.providerName}/>)
         ))}
     </List>
   );
