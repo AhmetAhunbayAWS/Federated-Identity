@@ -12,7 +12,7 @@ function App() {
   // })
 
   const oktaProvider : ProviderData = {providerName: 'OktaClient', displayName: 'Okta', icon:oktaIcon}
-  const {FederatedIdentity, useHandleSignInWithRedirect} = createFederatedIdentity({providers:['google', oktaProvider]});
+  const {FederatedIdentity, useHandleSignInWithRedirect} = createFederatedIdentity({providers:['google', oktaProvider, 'google']});
 
   const [state, handler] = useHandleSignInWithRedirect()
 

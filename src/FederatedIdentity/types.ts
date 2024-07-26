@@ -17,7 +17,7 @@ export const socialProviderList = [
 
 export interface CreateFederatedIdentityInput<T extends Partial<FederatedIdentityElements>, K extends string = string>{
     elements?: T;
-    providers: ProviderType<K>[];
+    providers: NoDuplicateProviders<ProviderType<K>[]>;
     handleSignInWithRedirect?: typeof handleSignInWithRedirect;
 }
 
