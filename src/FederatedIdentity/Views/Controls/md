@@ -32,3 +32,6 @@ FederatedIdentity = createFI(providers: 'google', { name: okta, icon: oktaicon, 
 context: {
     { name: google, icon: googleicon, displayname: Google}
 }
+
+
+createFederatedIdentity({providers: {providerName:"okta", icon: okta1},  {providerName:"okta", icon: okta2}})

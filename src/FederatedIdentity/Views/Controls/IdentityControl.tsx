@@ -105,11 +105,12 @@ export const IdentityControl : IdentityControl = (props) => {
     return (
         <ProviderDataProvider providerData={value}>
                 {children ??   
-                    <ListItemControlElement>
-                        <ButtonControlElement>
-                            <IconControlElement/>
-                        </ButtonControlElement>                    
-                    </ListItemControlElement>                 
+                    // <ListItemControlElement>
+                    //     <ButtonControlElement>
+                    //         <IconControlElement/>
+                    //     </ButtonControlElement>                    
+                    // </ListItemControlElement>  
+                    <IdentityControl providerName={value.providerName}/>               
                 }         
         </ProviderDataProvider>
     )
