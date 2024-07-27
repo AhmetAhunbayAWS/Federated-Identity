@@ -1,9 +1,6 @@
 import { FederatedIdentityElements } from "./context/elements/definitions";
 import React from "react";
-import { IdentitiesControl } from "./Views/Controls/IdentitiesControl";
 import { handleSignInWithRedirect } from "./Views/Controls/helpers";
-
-const {List} = FederatedIdentityElements
 
 export type socialProvidersUnion = 'amazon' | 'apple' | 'facebook' | 'google'
 export type AuthProvider = 'Amazon' | 'Apple' | 'Facebook' | 'Google';

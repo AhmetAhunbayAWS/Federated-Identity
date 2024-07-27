@@ -13,7 +13,7 @@ import { useProviderDataListContext } from "../../context/useContextFunctions";
 
 const {Button, Icon, ListItem} = FederatedIdentityElements
 
-const ListItemControlElement : typeof ListItem = React.forwardRef(
+export const ListItemControlElement : typeof ListItem = React.forwardRef(
     function _ListItemControlElement({
         children,
         ...props

@@ -3,6 +3,8 @@ import { FederatedIdentityElements } from "../../context/elements/definitions";
 import { ProviderData } from "../../types";
 import { useProviderDataListContext } from "../../context/useContextFunctions";
 import { IdentityControl } from "./IdentityControl";
+import { ProviderDataProvider } from "../../context/ProviderDataContext";
+import { ListItemControlElement, ButtonControlElement, IconControlElement } from "./IdentityControl";
 
 const {List} = FederatedIdentityElements
 
@@ -40,16 +42,22 @@ export const IdentitiesControl : IdentitiesControl = (props) => {
     //get provider data and pass into renderListItem
     //ref is being created and passed in here
 
-    const {children} = props
-
-    // if (children & renderListItem)
+    const {children, renderIdentity} = props
 
   return (
     <List>
         {children ?? providers.map((provider) => (
-            // renderListItem ?
-            //      (renderListItem(provider)) : 
-                (<IdentityControl key = {provider.providerName} providerName={provider.providerName}/>)
+            renderIdentity ?
+                 (renderIdentity(provider)) : 
+                (<ProviderDataProvider providerData={provider}>
+                  {children ??   
+                      <ListItemControlElement>
+                          <ButtonControlElement>
+                              <IconControlElement/>
+                          </ButtonControlElement>                    
+                      </ListItemControlElement>                 
+                  }         
+                </ProviderDataProvider>)
         ))}
     </List>
   );
