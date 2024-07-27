@@ -1,5 +1,5 @@
 import { FederatedIdentityElements } from "./context/elements/definitions";
-import { CreateFederatedIdentityInput, createProviderProps } from "./types";
+import { CreateFederatedIdentityInput } from "./types";
 //import { ActionState } from "../amplifyUIUtils/funcs";
 import createProvider from "./createProvider";
 import { IdentitiesControl } from "./Views/Controls/IdentitiesControl"; 
