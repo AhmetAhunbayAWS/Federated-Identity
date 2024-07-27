@@ -28,6 +28,17 @@ function App() {
       >Sign in with {providerName}</button>
     );
   }
+//   function myCustomRender(data: ProviderData) : React.JSX.Element {
+//     const {providerName, displayName} = data
+//     return(
+//         <div>
+//             <button onClick={() => 
+//                 handleSignInWithRedirect({providerName: providerName})}>
+//                 Click here for {displayName} login!
+//             </button>
+//         </div>
+//     )
+// }
 
   return (
     <FederatedIdentity>
@@ -35,14 +46,14 @@ function App() {
         {state.message ? (
           <p style={{ color: 'white' }}>{state.message}</p>
         ) : (
-          <FederatedIdentity.Identities.List>
-            <FederatedIdentity.Identities.Identity providerName="OktaClient">
-              <MyButton/>
-            </FederatedIdentity.Identities.Identity>
-            <FederatedIdentity.Identities.Identity providerName="google">
-              <MyButton/>
-            </FederatedIdentity.Identities.Identity>
-          </FederatedIdentity.Identities.List>
+          <div>
+              <FederatedIdentity.Identities.Identity providerName="OktaClient">
+                <MyButton/>
+              </FederatedIdentity.Identities.Identity>
+              <FederatedIdentity.Identities.Identity providerName="google">
+                <MyButton/>
+              </FederatedIdentity.Identities.Identity>
+          </div>
         )}    
       </FederatedIdentity.Identities>
     </FederatedIdentity>

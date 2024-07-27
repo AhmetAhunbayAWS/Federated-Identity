@@ -7,7 +7,7 @@ import { GetAuthenticatorText } from "./componentHelpers";
 import { FederatedIdentityElements } from "../../context/elements/definitions";
 import { Text } from "@aws-amplify/ui-react";
 import { ProviderDataProvider } from "../../context/ProviderDataContext";
-import { ProviderData, socialProviderList, socialProvidersUnion } from "../../types";
+import { socialProviderList, socialProvidersUnion } from "../../types";
 import { supportedProviderName } from "./helpers";
 import { useProviderDataListContext } from "../../context/useContextFunctions";
 
@@ -78,9 +78,6 @@ export interface IdentityControl<
     providerName: K;
     children?: React.ReactNode;
   }): JSX.Element;
-  ListItem: T['ListItem'];
-  Button: T['Button'];
-  Icon: T['Icon'];
 }
 
 export const IdentityControl : IdentityControl = (props) => {
@@ -107,15 +104,13 @@ export const IdentityControl : IdentityControl = (props) => {
     //TODO: pass providerName into providerDataProvider
     return (
         <ProviderDataProvider providerData={value}>
-                {children ??                    
-                    <ButtonControlElement>
-                        <IconControlElement/>
-                    </ButtonControlElement>                    
+                {children ??   
+                    <ListItemControlElement>
+                        <ButtonControlElement>
+                            <IconControlElement/>
+                        </ButtonControlElement>                    
+                    </ListItemControlElement>                 
                 }         
         </ProviderDataProvider>
     )
 }
-
-IdentityControl.Button = ButtonControlElement
-IdentityControl.Icon = IconControlElement
-IdentityControl.ListItem = ListItemControlElement

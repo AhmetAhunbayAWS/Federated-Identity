@@ -1,34 +1,38 @@
 import React from "react";
 import { FederatedIdentityElements } from "../../context/elements/definitions";
-import { AuthProvider, ProviderData } from "../../types";
+import { ProviderData } from "../../types";
 import { useProviderDataListContext } from "../../context/useContextFunctions";
-import { signInWithRedirect } from "aws-amplify/auth";
 import { IdentityControl } from "./IdentityControl";
-import { render } from "react-dom";
 
-const {Button, List} = FederatedIdentityElements
+const {List} = FederatedIdentityElements
 
-interface renderListItem{(data: ProviderData) : React.JSX.Element}
+interface RenderIdentity{(data: ProviderData) : React.JSX.Element}
 
-function renderListItem(data: ProviderData) : React.JSX.Element {
-    const {providerName, displayName} = data
-    return(
-        <div>
-            <Button onClick={() => signInWithRedirect({provider: providerName as AuthProvider})}>Click here for {displayName} login!</Button>
-        </div>
-    )
-}
+// function renderIdentity(data: ProviderData) : React.JSX.Element {
+//     const {providerName, displayName} = data
+//     return(
+//         <div>
+//             <Button onClick={() => signInWithRedirect({provider: providerName as AuthProvider})}>Click here for {displayName} login!</Button>
+//         </div>
+//     )
+// }
+
 
 export interface IdentitiesControl<
-  T extends Partial<FederatedIdentityElements> = FederatedIdentityElements,
-  // Button, Icon are ControlElemnts
+  T extends Partial<FederatedIdentityElements> = FederatedIdentityElements
 > {
-  (props: {
-    children?: React.ReactNode
-    renderListItem?: renderListItem;
-  }): JSX.Element;
-  Identity: IdentityControl<T>
-  List: T['List']
+  (props: ChildrenProps | RenderIdentityProps): JSX.Element;
+  Identity: IdentityControl<T>;
+}
+
+interface ChildrenProps {
+  children?: React.ReactNode;
+  renderIdentity?: never;
+}
+
+interface RenderIdentityProps {
+  children?: never;
+  renderIdentity?: RenderIdentity;
 }
 
 export const IdentitiesControl : IdentitiesControl = (props) => {
@@ -52,4 +56,3 @@ export const IdentitiesControl : IdentitiesControl = (props) => {
 }
 
 IdentitiesControl.Identity = IdentityControl
-IdentitiesControl.List = List
