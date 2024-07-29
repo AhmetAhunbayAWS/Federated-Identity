@@ -1,8 +1,11 @@
 import { createFederatedIdentity } from "./FederatedIdentity/createFederatedIdentity";
 import { oktaIcon } from "./FederatedIdentity/context/providedIcons";
 import { ProviderData } from "./FederatedIdentity/types"
-import { useProviderDataContext } from "./FederatedIdentity/context/useContextFunctions";
+import { useIsSignedIn } from "./hooks/useIsSignedIn";
 import {} from '@aws-amplify/ui-react'
+import Todo from "./Todo";
+import { useEffect } from "react";
+
 
 function App() {
 
@@ -12,22 +15,8 @@ function App() {
   // })
 
   const oktaProvider : ProviderData = {providerName: 'OktaClient', displayName: 'Okta', icon:oktaIcon}
-  const {FederatedIdentity, useHandleSignInWithRedirect} = createFederatedIdentity({providers:['google', oktaProvider, 'google']});
+  const {FederatedIdentity} = createFederatedIdentity({providers:['google', oktaProvider, 'google']});
 
-  const [state, handler] = useHandleSignInWithRedirect()
-
-  const MyButton = () => {
-    const {providerName} = useProviderDataContext()
-
-    return (
-      <button
-        disabled={state.isLoading}
-        onClick={() => {
-          handler({ providerName: providerName, customState: "SignedIn with " + {providerName}});
-        }}
-      >Sign in with {providerName}</button>
-    );
-  }
 //   function myCustomRender(data: ProviderData) : React.JSX.Element {
 //     const {providerName, displayName} = data
 //     return(
@@ -39,22 +28,18 @@ function App() {
 //         </div>
 //     )
 // }
-
+  const [signedInState, refreshCurrentUser] = useIsSignedIn() 
+  console.log(signedInState)
+  useEffect(() => {
+    refreshCurrentUser()
+  }, [])
+  
   return (
+    signedInState.data ?  <Todo/> :
     <FederatedIdentity>
       <FederatedIdentity.Identities>
-        {state.message ? (
-          <p style={{ color: 'white' }}>{state.message}</p>
-        ) : (
-          <div>
-              <FederatedIdentity.Identities.Identity providerName="OktaClient">
-                <MyButton/>
-              </FederatedIdentity.Identities.Identity>
-              <FederatedIdentity.Identities.Identity providerName="google">
-                <MyButton/>
-              </FederatedIdentity.Identities.Identity>
-          </div>
-        )}    
+            <FederatedIdentity.Identities.Identity providerName="OktaClient"/>            
+            <FederatedIdentity.Identities.Identity providerName="google"/>
       </FederatedIdentity.Identities>
     </FederatedIdentity>
   )

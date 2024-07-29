@@ -1,50 +1,36 @@
-import { Hub } from 'aws-amplify/utils';
-import { useEffect, useState } from 'react';
-import { HubCallback } from '@aws-amplify/core'
 import { getCurrentUser } from 'aws-amplify/auth';
+import useDataState from './UseDataState';
 
+async function _useIsSignedIn(
+  __: boolean,
+  _: void
+): Promise<boolean>{
+  console.log('enter handler')
+  await getCurrentUser();
+  console.log('got current user')
+  
 
-function useIsSignedIn() {
-    console.log("called hook")
-  
-    const [isSigned, setIsSigned] = useState<boolean>(false)
-  
-    useEffect(() => {
-      getCurrentUser()
-        .then(() => {
-          setIsSigned(true);
-        })
-        .catch(() => {
-          setIsSigned(false);
-        });
-      console.log("getCurrentUser called")
-    }, [])
-    
+  // useEffect(() => {
+  //   const listener: HubCallback = ({ payload }) => {
+  //     console.log(payload)
+  //     if (payload.event === 'signedIn') {
+  //       return true
+  //     } else if (payload.event === 'signedOut') {
+  //       return false
+  //     }
+  //   };
+   
+  //   const unsubscribe = Hub.listen('auth', listener);
 
-    useEffect(() => {
-      //code that runs upon every state change, side effect
-      console.log("Hub event called")
-      const listener : HubCallback = ({ payload } ) => {
-        console.log("hub payload:")
-        console.log(payload)
-        if (payload.event === 'signedIn'){
-            setIsSigned(true)
-        } else if (payload.event === 'signedOut'){
-            setIsSigned(false)
-        }
-      }
-  
-  
-      const unmount = Hub.listen('auth', listener);
-        
-      return () => {
-        unmount();
-        console.log("unmounted hub listener")
-      };
-  
-    }, [] ); //dependency array. when empty component wont unmount. Maybe because this is never rerendered?
-    
-    return isSigned
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
+  return true
 }
 
-export default useIsSignedIn
+export const useIsSignedIn = () => 
+  useDataState(_useIsSignedIn, false)
+
+

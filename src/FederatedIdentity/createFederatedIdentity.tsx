@@ -29,12 +29,8 @@ export function createFederatedIdentity<
     FederatedIdentity: FederatedIdentity,
     useHandleSignInWithRedirect: UseHandleSignInWithRedirect<K>
 } {
-
-    console.log("creating provider")
   
     const Provider = createProvider(input)
-
-    console.log("creating federated identity")
 
     function FederatedIdentity(input: {children?: React.ReactNode}): JSX.Element {
         const {children} = input

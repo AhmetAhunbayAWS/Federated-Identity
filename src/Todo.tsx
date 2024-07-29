@@ -16,7 +16,6 @@ const Todo = () => {
     }, []);
 
     function createTodo() {
-        console.log("todo call")
         client.models.Todo.create({ content: window.prompt("Todo content") });
     }
 

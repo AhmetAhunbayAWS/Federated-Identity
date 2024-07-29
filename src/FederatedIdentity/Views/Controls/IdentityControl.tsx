@@ -18,7 +18,6 @@ export const ListItemControlElement : typeof ListItem = React.forwardRef(
         children,
         ...props
     }, ref) {
-        console.log("ListItemControl")
         return (            
             <ListItem ref={ref} {...props} >
                 {children}
@@ -30,7 +29,6 @@ export const ListItemControlElement : typeof ListItem = React.forwardRef(
 export const ButtonControlElement: typeof Button = React.forwardRef(
     function ButtonElement({ children, ...props }, ref) {
         // button handler logic here, e.g. onClick
-        console.log("ButtonControlElement")
 
         const providerData = useProviderDataContext()
         const {providerName, displayName} = providerData
@@ -95,8 +93,6 @@ export const IdentityControl : IdentityControl = (props) => {
     const providers = useProviderDataListContext();
     const value = providers.find(({ providerName }) => providerName === _providerName);
 
-    console.log(value)
-
     if (!value) {
         throw new Error();
     }
@@ -105,12 +101,11 @@ export const IdentityControl : IdentityControl = (props) => {
     return (
         <ProviderDataProvider providerData={value}>
                 {children ??   
-                    // <ListItemControlElement>
-                    //     <ButtonControlElement>
-                    //         <IconControlElement/>
-                    //     </ButtonControlElement>                    
-                    // </ListItemControlElement>  
-                    <IdentityControl providerName={value.providerName}/>               
+                    <ListItemControlElement>
+                        <ButtonControlElement>
+                            <IconControlElement/>
+                        </ButtonControlElement>                    
+                    </ListItemControlElement>              
                 }         
         </ProviderDataProvider>
     )
