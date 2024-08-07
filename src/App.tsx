@@ -7,17 +7,22 @@ import { forwardRef, Ref } from 'react';
 import '@aws-amplify/ui-react/styles.css'
 import ComposableAuthenticator from './FederatedIdentities/compoableAuthenticator';
 
-function withForwardedRef<T, P>(Component: React.ComponentType<P>) {
-  return forwardRef<T, P>((props, ref) => (
-    <Component {...props} ref={ref as Ref<T>} />
-  ));
-}
 
-const MyButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <button style={{ backgroundColor: 'red', color:'red'}} onClick={()=>{console.log('hi')}}{...props} />
-);
+const myButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  function Button({ children, onClick, ...props }, ref) {
+    return(
+      <button style={{backgroundColor:'blue'}} onClick = {()=>{console.log('hi')}}ref={ref}{...props}>{children}</button>
+    )
+  }
+)
 
-const buttonWithRef = withForwardedRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(MyButton)
+const myIcon = forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>(
+  function Svg({ children,viewBox, ...props }, ref) {
+    return(
+      <svg ref={ref}viewBox='0 0 1024 1024'{...props}>{children}</svg>
+    )
+  }
+)
 
 
 function App() {
@@ -27,7 +32,7 @@ function App() {
   //     return <button onClick={() => handleSignInWithRedirect({provider: 'Google'})}></button>
   // })
   const oktaProvider : ProviderData = {providerName: 'OktaClient', displayName: 'Okta', icon:oktaIcon}
-  const {FederatedIdentities} = createFederatedIdentities({providers:['google', oktaProvider, 'amazon', {providerName:'hello', displayName: 'google', icon: 'google'}], elements:{Button:buttonWithRef}});
+  const {FederatedIdentities} = createFederatedIdentities({providers:['google', oktaProvider, 'amazon', {providerName:'hello', displayName: 'google', icon: 'google'}], elements:{Button: myButton, Icon: myIcon}});
   const signedInState = useIsSignedIn()
   
 //   function myCustomRender(data: ProviderData) : React.JSX.Element {

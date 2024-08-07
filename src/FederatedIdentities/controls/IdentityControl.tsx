@@ -1,5 +1,5 @@
 import { withBaseElementProps } from "./helpers";
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { useProviderDataContext } from "../context/contextUtils";
 import { useHandleSignInWithRedirectContext } from "../context/contextUtils";
 import { GetAuthenticatorText } from "./componentHelpers";
@@ -19,9 +19,17 @@ export const ListItemControlElement : typeof ListItem = withBaseElementProps(Lis
     style: {display: 'inline-block', margin: 0, padding: 0 }
 })
 
-const CustomButton = withBaseElementProps(Button, {
-    className:`${CLASS_BASE}__button amplify-button amplify-field-group__control federated-sign-in-button`
-})
+// const getButtonProps = ({
+//     onClick,
+//     ...props
+// }: React.ComponentProps<typeof Button>) => {
+//     onClick,
+//     ...props
+// }
+
+// const CustomButton = withBaseElementProps(Button, (...props):React.ComponentProps<HTMLButtonElement>=>{
+//     className:`${CLASS_BASE}__button amplify-button amplify-field-group__control federated-sign-in-button`
+// })
 
 export const ButtonControlElement: typeof Button = React.forwardRef(
     function ButtonElement({ children, ...props }, ref) {
@@ -35,14 +43,15 @@ export const ButtonControlElement: typeof Button = React.forwardRef(
         const onClick = handleClick(providerName, handleSignInWithRedirect)
 
         return (
-            <CustomButton 
+            <Button 
+                className={`${CLASS_BASE}__button amplify-button amplify-field-group__control federated-sign-in-button`}
                 onClick={onClick} 
                 ref={ref}
                 {...props} 
                 >
                 {children ?? <IconControlElement/>}
                 <Text className="amplify-text">{GetAuthenticatorText('signIn', displayName)}</Text>
-            </CustomButton>
+            </Button>
         );
     }
 );
