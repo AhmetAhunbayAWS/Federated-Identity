@@ -19,6 +19,10 @@ export const ListItemControlElement : typeof ListItem = withBaseElementProps(Lis
     style: {display: 'inline-block', margin: 0, padding: 0 }
 })
 
+const CustomButton = withBaseElementProps(Button, {
+    className:`${CLASS_BASE}__button amplify-button amplify-field-group__control federated-sign-in-button`
+})
+
 export const ButtonControlElement: typeof Button = React.forwardRef(
     function ButtonElement({ children, ...props }, ref) {
         // button handler logic here, e.g. onClick
@@ -31,20 +35,14 @@ export const ButtonControlElement: typeof Button = React.forwardRef(
         const onClick = handleClick(providerName, handleSignInWithRedirect)
 
         return (
-            <Button 
+            <CustomButton 
                 onClick={onClick} 
-                className={`${CLASS_BASE}__button amplify-button amplify-field-group__control federated-sign-in-button`} 
                 ref={ref}
-                style={{
-                    'gap': '1rem',
-                    width: '100%',
-                    height: '100%',                    
-                }}
                 {...props} 
                 >
                 {children ?? <IconControlElement/>}
                 <Text className="amplify-text">{GetAuthenticatorText('signIn', displayName)}</Text>
-            </Button>
+            </CustomButton>
         );
     }
 );
@@ -95,13 +93,11 @@ export const IdentityControl: IdentityControl = React.forwardRef<HTMLButtonEleme
         }
         
         const providers = useProviderDataListContext();
-        console.log(providers)
         const value = providers.find(({ providerName }) => providerName === _providerName);
 
         if (!value) {
             throw new Error();
         }
-        console.log(props.key)
 
         return (
             <ProviderDataProvider providerData={value}>

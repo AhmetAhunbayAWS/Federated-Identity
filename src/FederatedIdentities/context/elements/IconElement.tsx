@@ -80,7 +80,6 @@ import { CLASS_BASE } from '../../constants';
     const pathDataList = variant ? DEFAULT_ICON_PATHS[variant] : undefined;
     const children = pathDataList ? (pathDataList.map((pathData)=> {
       const key = `${pathData.fill}${pathData.fillRule ? `-${pathData.fillRule}` : ''}`;
-      console.log(key);
       return <path key={key} {...pathData} />
   })) : undefined;
     const svgProps = variant ? DEFAULT_ICON_ATTRIBUTES[variant] : undefined;

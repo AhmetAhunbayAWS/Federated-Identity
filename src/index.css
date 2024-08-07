@@ -64,3 +64,9 @@ a {
   font-weight: 800;
   text-decoration: none;
 }
+
+.federated-identities__button {
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+}

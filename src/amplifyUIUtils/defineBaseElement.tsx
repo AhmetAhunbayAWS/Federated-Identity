@@ -126,6 +126,7 @@ export default function defineBaseElement<
       const Element = React.useContext(ElementsContext)?.[displayName];
 
       if (Element) {
+        
         // only pass `variant` to provided `Element` values
         return <Element {...{ ...props, ref, variant }} />;
       }

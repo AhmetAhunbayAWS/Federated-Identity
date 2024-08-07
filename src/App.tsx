@@ -14,11 +14,10 @@ function withForwardedRef<T, P>(Component: React.ComponentType<P>) {
 }
 
 const MyButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <button style={{ backgroundColor: 'white', color:'red'}} {...props} />
+  <button style={{ backgroundColor: 'red', color:'red'}} onClick={()=>{console.log('hi')}}{...props} />
 );
 
 const buttonWithRef = withForwardedRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(MyButton)
-
 
 
 function App() {
@@ -29,26 +28,8 @@ function App() {
   // })
   const oktaProvider : ProviderData = {providerName: 'OktaClient', displayName: 'Okta', icon:oktaIcon}
   const {FederatedIdentities} = createFederatedIdentities({providers:['google', oktaProvider, 'amazon', {providerName:'hello', displayName: 'google', icon: 'google'}], elements:{Button:buttonWithRef}});
-
-//   function myCustomRender(data: ProviderData) : React.JSX.Element {
-//     const {providerName, displayName} = data
-//     return(
-//         <div>
-//             <button onClick={() => 
-//                 handleSignInWithRedirect({providerName: providerName})}>
-//                 Click here for {displayName} login!
-//             </button>
-//         </div>
-//     )
-// }
-  const signedInState = useIsSignedIn() 
-  console.log(signedInState)
+  const signedInState = useIsSignedIn()
   
-  // return (
-  //   signedInState.isLoading ? <p>loading</p> :
-  //   signedInState.data.isSignedIn ? <Todo/> :
-  //   <Authenticator />
-  // )
 //   function myCustomRender(data: ProviderData) : React.JSX.Element {
 //     const {providerName, displayName} = data
 //     return(
