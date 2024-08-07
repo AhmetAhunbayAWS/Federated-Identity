@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProviderData, ProviderType } from '../types';
-import { toProviderData } from './useContextFunctions';
+import { toProviderData } from './contextUtils';
 
 export const ProviderDataListContext =
   React.createContext<ProviderData[] | undefined>(undefined);

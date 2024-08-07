@@ -1,5 +1,5 @@
 import React from "react";
-import { handleSignInWithRedirect } from "../Views/Controls/helpers";
+import { handleSignInWithRedirect } from "../controls/helpers";
 
 export const HandleSignInWithRedirectContext =
   React.createContext<typeof handleSignInWithRedirect | undefined>(undefined);

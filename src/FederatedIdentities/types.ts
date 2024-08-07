@@ -1,6 +1,7 @@
 import { FederatedIdentityElements } from "./context/elements/definitions";
 import React from "react";
-import { handleSignInWithRedirect } from "./Views/Controls/helpers";
+import { handleSignInWithRedirect } from "./controls/helpers";
+import { IconVariant } from "./context/elements/IconElement";
 
 export type socialProvidersUnion = 'amazon' | 'apple' | 'facebook' | 'google'
 export type AuthProvider = 'Amazon' | 'Apple' | 'Facebook' | 'Google';
@@ -14,13 +15,13 @@ export const socialProviderList = [
 
 export interface CreateFederatedIdentityInput<T extends Partial<FederatedIdentityElements>, K extends string = string>{
     elements?: T;
-    providers: NoDuplicateProviders<ProviderType<K>[]>;
+    providers: ProviderType<K>[];
     handleSignInWithRedirect?: typeof handleSignInWithRedirect;
 }
 
 export interface ProviderData<T extends string = string> {
     displayName: string;
-    icon: React.ReactNode;
+    icon?: React.ReactNode | IconVariant;
     providerName: T;
 }
 

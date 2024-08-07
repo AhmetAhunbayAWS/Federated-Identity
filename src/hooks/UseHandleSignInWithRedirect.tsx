@@ -1,7 +1,7 @@
 import { signInWithRedirect } from "aws-amplify/auth";
 import useDataState from "./UseDataState";
-import { HandleSigninWithRedirectInput } from "../FederatedIdentity/types";
-import { handleSignInWithRedirect } from "../FederatedIdentity/Views/Controls/helpers";
+import { HandleSigninWithRedirectInput } from "../FederatedIdentities/types";
+import { handleSignInWithRedirect } from "../FederatedIdentities/controls/helpers";
 
 
 //import { AuthProviders } from "aws-amplify/datastore";

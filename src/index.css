@@ -56,7 +56,8 @@ li {
 }
 
 li:hover {
-  background: #dadbf9;
+  animation: none; /* Disable any animation */
+  transition: none;
 }
 
 a {

@@ -1,10 +1,10 @@
 import { HandleSignInWithRedirectContext } from "./HandleRedirectContext";
 import React from "react";
-import { handleSignInWithRedirect } from "../Views/Controls/helpers";
+import { handleSignInWithRedirect } from "../controls/helpers";
 import { ProviderData, ProviderType, socialProviderList, socialProvidersUnion } from "../types";
 import { ProviderDataListContext } from "./ProviderDataListContext";
-import { GoogleIcon, FacebookIcon, AmazonIcon, AppleIcon } from "./providedIcons";
 import { ProviderDataContext } from "./ProviderDataContext";
+import { IconVariant } from "./elements/IconElement";
 
 
 export const useHandleSignInWithRedirectContext = (): typeof handleSignInWithRedirect => {
@@ -54,16 +54,10 @@ export const useProviderDataListContext = (): ProviderData[] => {
     return ""
 }
 
-function supportedIcon(provider: socialProvidersUnion) : JSX.Element {
-        if (provider === 'facebook') {
-            return FacebookIcon;
-        } else if (provider === 'google') {
-        return GoogleIcon;
-        } else if (provider === 'amazon') {
-        return AmazonIcon;
-        } else if (provider === 'apple') {
-        return AppleIcon;
-        }
+function supportedIcon(provider: socialProvidersUnion) : JSX.Element | IconVariant {
+    if (provider === 'facebook' || provider === 'google' || provider === 'amazon' || provider === 'apple') {
+        return provider;
+    }
     return <></>;
 }
 
@@ -76,7 +70,22 @@ function getSupportedProviderData(providerName: socialProvidersUnion) : Provider
     }
 }
 
+function validateProviderTypes(providers: ProviderType[]): void {
+    const providerNames = new Set<string>();
+  
+    providers.forEach((provider) => {
+      const providerName = typeof provider === 'string' ? provider : provider.providerName;
+  
+      if (providerNames.has(providerName)) {
+        throw new Error(`Duplicate provider name found: ${providerName}`);
+      }
+  
+      providerNames.add(providerName);
+    });
+  }
+
 export function toProviderData(providers: ProviderType[]): ProviderData[] {
+    validateProviderTypes(providers);
     return providers.map((provider) => {
         if (socialProviderList.includes(provider as string) ) {
             return getSupportedProviderData(provider as socialProvidersUnion)

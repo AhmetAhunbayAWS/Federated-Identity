@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.federated-sign-in__list__item.no-hover:hover {
+  animation: none; /* Disable any animation */
+  transition: none; /* Disable any transition */
+}

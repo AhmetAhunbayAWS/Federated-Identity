@@ -1,9 +1,9 @@
 
-import { socialProvidersUnion, socialProviderList, AuthProvider } from "../../types";
+import { socialProvidersUnion, socialProviderList, AuthProvider } from "../types";
 import { signInWithRedirect } from "aws-amplify/auth";
 import React from "react";
-import { BaseElement, ElementRefType } from "../../../amplifyUIUtils/funcs";
-import { HandleSigninWithRedirectInput } from "../../types";
+import { BaseElement, ElementRefType } from "../../amplifyUIUtils/funcs";
+import { HandleSigninWithRedirectInput } from "../types";
 
 
 

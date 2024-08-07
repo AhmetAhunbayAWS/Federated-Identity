@@ -1,36 +1,44 @@
 import { getCurrentUser } from 'aws-amplify/auth';
-import useDataState from './UseDataState';
+import { Hub, HubCallback } from '@aws-amplify/core';
+import { useEffect } from 'react';
+import useDataState, { DataState } from './UseDataState';
 
-async function _useIsSignedIn(
-  __: boolean,
-  _: void
-): Promise<boolean>{
-  console.log('enter handler')
-  await getCurrentUser();
-  console.log('got current user')
-  
+const action = async (
+  _: boolean,
+  input: { setState?: boolean }
+) => {
+  try {
+    await getCurrentUser();
+    return true;
+  } catch (error) {
+    if (input?.setState) {
+      return false;
+    }
+    throw error;
+  }
+};
 
-  // useEffect(() => {
-  //   const listener: HubCallback = ({ payload }) => {
-  //     console.log(payload)
-  //     if (payload.event === 'signedIn') {
-  //       return true
-  //     } else if (payload.event === 'signedOut') {
-  //       return false
-  //     }
-  //   };
-   
-  //   const unsubscribe = Hub.listen('auth', listener);
+export function useIsSignedIn(): DataState<boolean> {
+  const [state, handler] = useDataState(action, false);
 
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
+  useEffect(() => {
+    handler();
 
-  return true
+    const listener: HubCallback = ({ payload }) => {
+      if (payload.event === 'signedIn') {
+        handler();
+      } else if (payload.event === 'signedOut') {
+        handler({ setState: true });
+        handler();
+      }
+    };
+
+    const unmount = Hub.listen('auth', listener);
+
+    return () => {
+      unmount();
+    };
+  }, [handler]);
+
+  return state;
 }
-
-export const useIsSignedIn = () => 
-  useDataState(_useIsSignedIn, false)
-
-
